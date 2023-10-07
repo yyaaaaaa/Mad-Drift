@@ -1,24 +1,28 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int level;
-    public float speed;
-    public float acceleration;
-    public int hp;
-    private int money;
-    private int UpgradeCostSpeed = 1;
-    private int UpgradeCostAcc = 1;
-    private int UpgradeCostHP = 1;
+    public int money;
     public List<Level> levels;
     private float prevSpeed;
     private float prevAcc;
     private int prevHp;
     public ArcadeVehicleController player;
     public TextMeshProUGUI moneyText;
+    private List<Upgrade> speedUpgrade = new();
+    private List<Upgrade> accUpgrade = new();
+    private List<Upgrade> hpUpgrade = new();
+    public TextAsset speedUpgradeText;
+    public TextAsset accUpgradeText;
+    public TextAsset hpUpgradeText;
+    int levelSpeed = 0;
+    int levelHp = 0;
+    int levelAcc = 0;
 
     private void Awake()
     {
@@ -30,19 +34,15 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+        ParseUpgrades();
         if (PlayerPrefs.GetInt("level")>=1)
         {
             level = PlayerPrefs.GetInt("level");
-            speed = PlayerPrefs.GetFloat("speed");
-            acceleration = PlayerPrefs.GetFloat("acceleration");
-            hp = PlayerPrefs.GetInt("hp");
             money = PlayerPrefs.GetInt("money");
-            UpgradeCostSpeed = PlayerPrefs.GetInt("upgradeCostSpeed");
-            UpgradeCostAcc = PlayerPrefs.GetInt("upgradeCostAcc");
-            UpgradeCostHP = PlayerPrefs.GetInt("upgradeCostHp");
-            prevSpeed = player.MaxSpeed;
-            prevAcc = player.accelaration;
-            prevHp = player.GetComponentInChildren<HPController>().health;
+            levelSpeed = PlayerPrefs.GetInt("levelSpeed");
+            levelHp = PlayerPrefs.GetInt("levelHp");
+            levelAcc = PlayerPrefs.GetInt("levelAcc");
+            SetPrevDef();
             UpdateDef();
         }
         UpdateMoney();
@@ -51,46 +51,40 @@ public class GameManager : MonoBehaviour
     public void Save()
     {
         PlayerPrefs.SetInt("level", level);
-        PlayerPrefs.SetFloat("speed", speed);
-        PlayerPrefs.SetFloat("acceleration", acceleration);
-        PlayerPrefs.SetInt("hp", hp);
         PlayerPrefs.SetInt("money", money);
-        PlayerPrefs.SetInt("upgradeCostSpeed", UpgradeCostSpeed);
-        PlayerPrefs.SetInt("upgradeCostAcc", UpgradeCostAcc);
-        PlayerPrefs.SetInt("upgradeCostHp", UpgradeCostHP);
+        PlayerPrefs.SetInt("levelSpeed" , levelSpeed);
+        PlayerPrefs.SetInt("levelHp", levelHp);
+        PlayerPrefs.SetInt("levelAcc", levelAcc);
         PlayerPrefs.Save();
     }
 
     public void PlusSpeed()
     {
-        if (money >= UpgradeCostSpeed)
+        if (money >= speedUpgrade[levelSpeed].UpdradeCost)
         {
-            RemoveMoney(UpgradeCostSpeed);
-            speed += 0.5f;
-            UpgradeCostSpeed *= 2;
+            RemoveMoney(speedUpgrade[levelSpeed].UpdradeCost);
+            levelSpeed++;
             UpdateDef();
         }
     }
     public void PlusAcceleration()
     {
-        if (money >= UpgradeCostAcc)
+        if (money >= accUpgrade[levelAcc].UpdradeCost)
         {
-            RemoveMoney(UpgradeCostAcc);
-            acceleration += 0.5f;
-            UpgradeCostAcc *= 2;
+            RemoveMoney(accUpgrade[levelAcc].UpdradeCost);
+            levelAcc++;
             UpdateDef();
         }
     }
 
     public void PlusHP()
     {
-        if (money >= UpgradeCostHP)
+        if (money >= hpUpgrade[levelHp].UpdradeCost)
         {
-            RemoveMoney(UpgradeCostHP);
-            AddHp(1);
-            UpgradeCostHP *= 2;
+            RemoveMoney(hpUpgrade[levelHp].UpdradeCost);
+            levelHp++;
             UpdateDef();
-        }        
+        }
     }
 
     public void AddMoney(int ammount)
@@ -100,19 +94,14 @@ public class GameManager : MonoBehaviour
 
     public void RemoveMoney(int ammount) {  this.money -= ammount; }
 
-    public void AddHp(int ammount)
-    {
-        this.hp += ammount;
-    }
-    public void RemoveHp(int ammount) { this.hp -= ammount; }
 
 
 
     private void UpdateDef()
     {
-        player.MaxSpeed = speed + prevSpeed; 
-        player.accelaration = acceleration + prevAcc;
-        player.GetComponentInChildren<HPController>().health = hp + prevHp;
+        player.MaxSpeed = speedUpgrade[levelSpeed].addAmount + prevSpeed; 
+        player.accelaration = accUpgrade[levelAcc].addAmount + prevAcc;
+        player.GetComponentInChildren<HPController>().health = (int)hpUpgrade[levelHp].addAmount + prevHp;
         UpdateMoney();
         Save();
     }
@@ -120,5 +109,44 @@ public class GameManager : MonoBehaviour
     public void UpdateMoney()
     {
         moneyText.text = money.ToString();
+    }
+
+    void ParseUpgrades()
+    {
+        var lines = speedUpgradeText.text.Split('\n');
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var values = lines[i].Trim().Split(' ');
+            var cost = int.Parse(values[0]);
+            var amount = float.Parse(values[1]);
+            speedUpgrade.Add(new Upgrade(cost, amount));
+        }
+        var lines2 = accUpgradeText.text.Split('\n');
+        for (int i = 0; i < lines2.Length; i++)
+        {
+            var values = lines2[i].Trim().Split(' ');
+            Debug.Log(values[0]);
+            Debug.Log(values[1]);
+            var cost = int.Parse(values[0]);
+            var amount = float.Parse(values[1]);
+            accUpgrade.Add(new Upgrade(cost, amount));
+        }
+        var lines3 = hpUpgradeText.text.Split('\n');
+        for (int i = 0; i < lines3.Length; i++)
+        {
+            var values = lines3[i].Trim().Split(' ');
+            Debug.Log(values[0]);
+            Debug.Log(values[1]);
+            var cost = int.Parse(values[0]);
+            var amount = float.Parse(values[1]);
+            hpUpgrade.Add(new Upgrade(cost, amount));
+        }
+    }
+
+    void SetPrevDef()
+    {
+        prevSpeed = player.MaxSpeed;
+        prevAcc = player.accelaration;
+        prevHp = player.GetComponentInChildren<HPController>().health;
     }
 }

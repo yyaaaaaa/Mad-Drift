@@ -9,8 +9,17 @@ public class UIManager : MonoBehaviour
     public GameObject LoseContaier;
     public GameObject ShopContainer;
     GameObject current;
-    private void Start()
+    public static UIManager instance;
+    private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
         current = MainMenuContainer;
         Time.timeScale = 0f;
     }
@@ -43,7 +52,7 @@ public class UIManager : MonoBehaviour
     {
         current.SetActive(false);
         WinPopUpContainer.SetActive(true);
-        current= WinPopUpContainer;
+        current = WinPopUpContainer;
         Time.timeScale = 0f;
     }
 

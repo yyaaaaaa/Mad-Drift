@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
     private int minReward = 10;
     private int maxReward = 100;
-
+    public static LevelManager instance;
     bool timerIsRunning = false;
     public Slider slider;
     public GameObject player;
@@ -24,22 +24,29 @@ public class LevelManager : MonoBehaviour
     public TextMeshProUGUI rewardText;
     public TextMeshProUGUI loseRewardText;
     public TextMeshProUGUI addRewardText;
-    public UIManager UIManager;
     private List<Level> levels = new();
 
     public TextAsset levelsTextAsset;
-    void Start()
+    private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
         ParseLevels();
         timer = 0;
         timerIsRunning = true;
         slider.maxValue = timeCap;
         level = GameManager.instance.level;
-        SpawnEnemy();   
+        SpawnEnemy();
         LoadLevel(level);
     }
 
-    void Update()
+        void Update()
     {
         if (timerIsRunning)
         {
@@ -74,7 +81,7 @@ public class LevelManager : MonoBehaviour
     private void OnLevelComplete()
     {
         int addReward = Random.Range(minReward, maxReward);
-        UIManager.WinLevel();
+        UIManager.instance.WinLevel();
         int totalReward = addReward + reward; 
         addRewardText.text = "+" + totalReward.ToString();
         GameManager.instance.AddMoney(totalReward);
@@ -91,7 +98,9 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(enemy);
         }
+        GameManager.instance.UpdateMoney();
         enemies.Clear();
+        player.SetActive(false);
         player.transform.position = Vector3.zero;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.GetComponentInChildren<HPController>().health = 100;
@@ -146,5 +155,6 @@ public class LevelManager : MonoBehaviour
         }
 
     }
-
+     
+    public int GetReward() { return reward; }
 }

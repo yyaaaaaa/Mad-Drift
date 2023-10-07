@@ -4,7 +4,6 @@ public class HPController : MonoBehaviour
 {
     public int health = 100;
     public GameObject smokegm;
-    public UIManager uiManager;
     public void DealDamage(int damage)
     {
         if(health > 0)
@@ -29,7 +28,9 @@ public class HPController : MonoBehaviour
     {
         if (this.gameObject.CompareTag("Player"))
         {
-            uiManager.LoseLevel();
+            UIManager.instance.LoseLevel();
+            GameManager.instance.AddMoney(LevelManager.instance.GetReward());
+            GameManager.instance.UpdateMoney();
             health = 100;
             transform.parent.gameObject.SetActive(false);
         }
