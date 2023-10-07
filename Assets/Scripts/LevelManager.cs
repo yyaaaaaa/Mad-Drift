@@ -94,6 +94,7 @@ public class LevelManager : MonoBehaviour
         }
         enemies.Clear();
         player.transform.position = Vector3.zero;
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.GetComponentInChildren<HPController>().health = 100;
         player.SetActive(true);
         timer = 0;
