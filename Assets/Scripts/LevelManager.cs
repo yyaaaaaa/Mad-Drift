@@ -27,6 +27,9 @@ public class LevelManager : MonoBehaviour
     private List<Level> levels = new();
 
     public TextAsset levelsTextAsset;
+
+    
+
     private void Awake()
     {
         if (instance != null)
@@ -34,7 +37,7 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        
         instance = this;
         DontDestroyOnLoad(gameObject);
         ParseLevels();
@@ -99,8 +102,8 @@ public class LevelManager : MonoBehaviour
             Destroy(enemy);
         }
         GameManager.instance.UpdateMoney();
-        enemies.Clear();
         player.SetActive(false);
+        enemies.Clear();
         player.transform.position = Vector3.zero;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.GetComponentInChildren<HPController>().health = 100;
@@ -109,6 +112,7 @@ public class LevelManager : MonoBehaviour
         timerIsRunning = true;
         slider.maxValue = timeCap;
         SpawnEnemy();
+        Time.timeScale = 1f;
     }
 
     void SpawnEnemy()

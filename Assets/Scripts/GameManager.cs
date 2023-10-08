@@ -23,6 +23,12 @@ public class GameManager : MonoBehaviour
     int levelSpeed = 0;
     int levelHp = 0;
     int levelAcc = 0;
+    public TextMeshProUGUI levelSpeedText;
+    public TextMeshProUGUI levelHpText;
+    public TextMeshProUGUI levelAccText;
+    public TextMeshProUGUI costSpeedText;
+    public TextMeshProUGUI costHpText;
+    public TextMeshProUGUI costAccText;
 
     private void Awake()
     {
@@ -102,6 +108,12 @@ public class GameManager : MonoBehaviour
         player.MaxSpeed = speedUpgrade[levelSpeed].addAmount + prevSpeed; 
         player.accelaration = accUpgrade[levelAcc].addAmount + prevAcc;
         player.GetComponentInChildren<HPController>().health = (int)hpUpgrade[levelHp].addAmount + prevHp;
+        levelSpeedText.text = "Level: " + levelSpeed.ToString();
+        levelHpText.text = "Level: " + levelHp.ToString();
+        levelAccText.text = "Level: " + levelAcc.ToString();
+        costSpeedText.text = speedUpgrade[levelSpeed].UpdradeCost.ToString();
+        costHpText.text = hpUpgrade[levelHp].UpdradeCost.ToString();
+        costAccText.text = accUpgrade[levelAcc].UpdradeCost.ToString();
         UpdateMoney();
         Save();
     }
@@ -125,8 +137,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < lines2.Length; i++)
         {
             var values = lines2[i].Trim().Split(' ');
-            Debug.Log(values[0]);
-            Debug.Log(values[1]);
             var cost = int.Parse(values[0]);
             var amount = float.Parse(values[1]);
             accUpgrade.Add(new Upgrade(cost, amount));
@@ -134,9 +144,7 @@ public class GameManager : MonoBehaviour
         var lines3 = hpUpgradeText.text.Split('\n');
         for (int i = 0; i < lines3.Length; i++)
         {
-            var values = lines3[i].Trim().Split(' ');
-            Debug.Log(values[0]);
-            Debug.Log(values[1]);
+            var values = lines3[i].Trim().Split(' ');   
             var cost = int.Parse(values[0]);
             var amount = float.Parse(values[1]);
             hpUpgrade.Add(new Upgrade(cost, amount));

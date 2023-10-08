@@ -19,17 +19,19 @@ public class SkidMarks : MonoBehaviour
     private void OnEnable()
     {
         skidMark.enabled = true;
+        skidMark.emitting = true;
     }
     private void OnDisable()
     {
         skidMark.enabled = false;
+        skidMark.emitting = false;
     }
 
     void FixedUpdate()
     {
-        if (carController.transform.position == Vector3.zero)
+        if (carController.transform.position.z <= 5f && carController.transform.position.z >= -5f)
         {
-            fadeOutSpeed = 1000f;
+            fadeOutSpeed = 100000000f;
         }
         if (carController.grounded())
         {
