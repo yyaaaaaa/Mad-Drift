@@ -111,8 +111,8 @@ public class LevelManager : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        int amount = 1 + (int)level / 100;
-        int random = Random.Range(0, enemiesToSpawn.Capacity+1);
+        int amount = Random.Range(1, 3);
+        int random = Random.Range(0, enemiesToSpawn.Capacity);
 
         for (int i = 0; i < amount; i++)
         {

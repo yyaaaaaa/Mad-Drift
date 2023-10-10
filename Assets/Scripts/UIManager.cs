@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject ShopContainer;
     GameObject current;
     public static UIManager instance;
+    public InterstitialAd ad;
     private void Awake()
     {
         if (instance != null)
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
         current.SetActive(false);
         GameContainer.SetActive(true);
         current = GameContainer;
+        ad.LoadAd();
         Time.timeScale = 1f;
     }
     public void Garage()
@@ -51,6 +53,7 @@ public class UIManager : MonoBehaviour
     }
     public void WinLevel()
     {
+        ad.ShowAd();
         current.SetActive(false);
         WinPopUpContainer.SetActive(true);
         current = WinPopUpContainer;
@@ -59,6 +62,7 @@ public class UIManager : MonoBehaviour
 
     public void LoseLevel()
     {
+        ad.ShowAd();
         current.SetActive(false);
         LoseContaier.SetActive(true);
         current = LoseContaier;
@@ -75,6 +79,7 @@ public class UIManager : MonoBehaviour
     }
     public void NextLevel()
     {
+        ad.LoadAd();
         GameManager.instance.ChangeScene();
         LevelManager.instance.LevelStart();
         current.SetActive(false);

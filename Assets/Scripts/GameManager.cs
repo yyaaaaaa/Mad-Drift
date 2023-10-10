@@ -163,7 +163,6 @@ public class GameManager : MonoBehaviour
     {
         int rand = Random.Range(1, 4);
         SceneManager.LoadScene("Level" + rand);
-        LevelManager.instance.SpawnEnemy();
     }
 
 }

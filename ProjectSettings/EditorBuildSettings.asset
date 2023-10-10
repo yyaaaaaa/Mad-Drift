@@ -11,10 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Level1.unity
     guid: d9c0d598ed7d91446afebf9348a32ddc
+  - enabled: 1
+    path: Assets/Levels/Level2.unity
+    guid: 77880dbb04c438c4586ac3cafdd53e4b
+  - enabled: 1
+    path: Assets/Levels/Level3.unity
+    guid: 13f9d29ee254db441aeaa729c7aa5c86
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 4f166170d56a5e041bf1a7c6327aa6c3,
       type: 2}
-    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
-      guid: 5eb6f72e617c3aa4da422929628e7a66, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 0}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 69ad17137536924468fd4926de68d870, type: 2}
