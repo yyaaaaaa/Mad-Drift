@@ -36,16 +36,10 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
             return;
-        }
-        
+        }       
         instance = this;
-        DontDestroyOnLoad(gameObject);
         ParseLevels();
-        timer = 0;
-        timerIsRunning = true;
-        slider.maxValue = timeCap;
         level = GameManager.instance.level;
-        SpawnEnemy();
         LoadLevel(level);
     }
 
@@ -115,10 +109,10 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    void SpawnEnemy()
+    public void SpawnEnemy()
     {
         int amount = 1 + (int)level / 100;
-        int random = Random.Range(0, enemiesToSpawn.Capacity);
+        int random = Random.Range(0, enemiesToSpawn.Capacity+1);
 
         for (int i = 0; i < amount; i++)
         {

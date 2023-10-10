@@ -19,12 +19,13 @@ public class UIManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
         current = MainMenuContainer;
         Time.timeScale = 0f;
     }
     public void PlayGame()
     {
+        GameManager.instance.ChangeScene();
+        LevelManager.instance.LevelStart();
         current.SetActive(false);
         GameContainer.SetActive(true);
         current = GameContainer;
@@ -65,6 +66,8 @@ public class UIManager : MonoBehaviour
     }
     public void RestartLevel()
     {
+        GameManager.instance.ChangeScene();
+        LevelManager.instance.LevelStart();
         current.SetActive(false);
         GameContainer.SetActive(true);
         current = GameContainer;
@@ -72,6 +75,8 @@ public class UIManager : MonoBehaviour
     }
     public void NextLevel()
     {
+        GameManager.instance.ChangeScene();
+        LevelManager.instance.LevelStart();
         current.SetActive(false);
         GameContainer.SetActive(true);
         current = GameContainer;

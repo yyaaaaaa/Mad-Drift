@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Cinemachine.DocumentationSortingAttribute;
 
 public class GameManager : MonoBehaviour
@@ -157,4 +158,12 @@ public class GameManager : MonoBehaviour
         prevAcc = player.accelaration;
         prevHp = player.GetComponentInChildren<HPController>().health;
     }
+
+    public void ChangeScene()
+    {
+        int rand = Random.Range(1, 4);
+        SceneManager.LoadScene("Level" + rand);
+        LevelManager.instance.SpawnEnemy();
+    }
+
 }
