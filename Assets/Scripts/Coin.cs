@@ -13,7 +13,6 @@ public class Coin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.instance.AddMoney(amount);
-            GameManager.instance.UpdateMoney();
             Destroy(gameObject);
         }
     }

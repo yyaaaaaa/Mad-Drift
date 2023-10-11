@@ -35,7 +35,8 @@ public class ArcadeVehicleController : MonoBehaviour
     public float skidWidth;
 
 
-    private float radius, horizontalInput, verticalInput;
+    private float radius, horizontalInput;
+    public float verticalInput;
     private Vector3 origin;
     private float screen;   
 

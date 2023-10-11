@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public List<Level> levels;
     private float prevSpeed;
     private float prevAcc;
-    private int prevHp;
+    private float prevHp;
     public ArcadeVehicleController player;
     public TextMeshProUGUI moneyText;
     private List<Upgrade> speedUpgrade = new();
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI costSpeedText;
     public TextMeshProUGUI costHpText;
     public TextMeshProUGUI costAccText;
+    public TextMeshProUGUI levelText;
 
     private void Awake()
     {
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
     public void AddMoney(int ammount)
     {
         this.money += ammount;
+        UpdateMoney();
     }
 
     public void RemoveMoney(int ammount) {  this.money -= ammount; }
@@ -108,15 +110,15 @@ public class GameManager : MonoBehaviour
     {
         player.MaxSpeed = speedUpgrade[levelSpeed].addAmount + prevSpeed; 
         player.accelaration = accUpgrade[levelAcc].addAmount + prevAcc;
-        player.GetComponentInChildren<HPController>().maxHealth = (int)hpUpgrade[levelHp].addAmount + prevHp;
-        player.GetComponentInChildren<HPController>().slider.maxValue = (int)hpUpgrade[levelHp].addAmount + prevHp;
+        player.GetComponentInChildren<HPController>().maxHealth = hpUpgrade[levelHp].addAmount + prevHp;
+        player.GetComponentInChildren<HPController>().slider.maxValue = hpUpgrade[levelHp].addAmount + prevHp;
         levelSpeedText.text = "Level: " + levelSpeed.ToString();
         levelHpText.text = "Level: " + levelHp.ToString();
         levelAccText.text = "Level: " + levelAcc.ToString();
         costSpeedText.text = speedUpgrade[levelSpeed].UpdradeCost.ToString();
         costHpText.text = hpUpgrade[levelHp].UpdradeCost.ToString();
         costAccText.text = accUpgrade[levelAcc].UpdradeCost.ToString();
-        UpdateMoney();
+        levelText.text = "LEVEL " + level;
         Save();
     }
 

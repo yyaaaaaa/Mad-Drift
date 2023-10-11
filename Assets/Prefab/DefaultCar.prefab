@@ -5018,7 +5018,7 @@ MonoBehaviour:
   player: {fileID: 0}
   MaxSpeed: 100
   accelaration: 20
-  turn: 15
+  turn: 17
   gravity: 7
   downforce: 5
   AirControl: 1
@@ -15610,6 +15610,8 @@ MonoBehaviour:
   smokegm: {fileID: 1602509497}
   slider: {fileID: 6999109150605546853}
   maxHealth: 0
+  explosion: {fileID: 1000012903210382, guid: e37496e0c52f56749909e02c9c7d3cf9, type: 3}
+  timeDamage: 2
 --- !u!1001 &462439247585456130
 PrefabInstance:
   m_ObjectHideFlags: 0

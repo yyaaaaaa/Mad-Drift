@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -40,12 +42,6 @@ public class UIManager : MonoBehaviour
         GarageContainer.SetActive(true);
         current = GarageContainer;
     }
-    public void Shop()
-    {
-        current.SetActive(false);
-        ShopContainer.SetActive(true);
-        current = ShopContainer;
-    }
     public void ReturnToMainMenu()
     {
         current.SetActive(false);
@@ -71,6 +67,7 @@ public class UIManager : MonoBehaviour
     }
     public void RestartLevel()
     {
+        ad.LoadAd();
         GameManager.instance.ChangeScene();
         LevelManager.instance.LevelStart();
         current.SetActive(false);
@@ -88,4 +85,5 @@ public class UIManager : MonoBehaviour
         current = GameContainer;
         Time.timeScale = 1f;
     }
+
 }

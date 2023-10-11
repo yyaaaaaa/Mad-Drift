@@ -29,8 +29,8 @@ public class LevelManager : MonoBehaviour
     public TextAsset levelsTextAsset;
 
     public GameObject coin;
-    public GameObject canister; 
-
+    public GameObject canister;
+    public GameObject textobj;
     private void Awake()
     {
         if (instance != null)
@@ -87,7 +87,6 @@ public class LevelManager : MonoBehaviour
         GameManager.instance.AddMoney(totalReward);
         GameManager.instance.level += 1;
         level += 1;
-        GameManager.instance.UpdateMoney();
         GameManager.instance.Save();
         LoadLevel(level);
     }
@@ -98,7 +97,6 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(enemy);
         }
-        GameManager.instance.UpdateMoney();
         player.SetActive(false);
         enemies.Clear();
         player.transform.position = Vector3.zero;
@@ -132,6 +130,7 @@ public class LevelManager : MonoBehaviour
             GameObject enemy = Instantiate(enemiesToSpawn[random], positions[randomPos], Quaternion.identity);
             positions[randomPos] = Vector3.zero;
             enemy.GetComponent<ArcadeVehicleController>().player = player;
+            enemy.GetComponentInChildren<HPController>().text = textobj;
             enemies.Add(enemy);
 
         }
@@ -176,7 +175,7 @@ public class LevelManager : MonoBehaviour
         float randomCoin = Random.Range(100, 200);
         float randomCanister = Random.Range(100, 200);
         bool y = false;
-        if (Random.Range(0, 1) == 1)
+        if (Random.Range(0, 2) == 1)
         {
             y = true;
         }
@@ -191,5 +190,14 @@ public class LevelManager : MonoBehaviour
             Instantiate(coin, new Vector3(player.transform.position.x + randomCoin, 4f, player.transform.position.z), Quaternion.identity);
             Instantiate(canister, new Vector3(player.transform.position.x - randomCanister, 4f, player.transform.position.z), Quaternion.identity);
         }
+    }
+
+    public void DisableCollisions(GameObject obj)
+    {
+        obj.GetComponentInParent<BoxCollider>().enabled = false;
+    }
+    public void EnableCollisions(GameObject obj)
+    {
+        obj.GetComponentInParent<BoxCollider>().enabled = true;
     }
 }
