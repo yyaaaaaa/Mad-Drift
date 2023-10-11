@@ -1,9 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HPController : MonoBehaviour
 {
     public int health = 100;
     public GameObject smokegm;
+    public Slider slider;
+    public int maxHealth;
+    
+    private void Start()
+    {
+        slider.maxValue = maxHealth;
+        health = maxHealth;
+    }
     public void DealDamage(int damage)
     {
         if(health > 0)
@@ -11,6 +20,8 @@ public class HPController : MonoBehaviour
     }
     private void Update()
     {
+        
+        slider.value = health;
         if (health <= 0)
         {
             health = 0;
@@ -31,7 +42,7 @@ public class HPController : MonoBehaviour
             UIManager.instance.LoseLevel();
             GameManager.instance.AddMoney(LevelManager.instance.GetReward());
             GameManager.instance.UpdateMoney();
-            health = 100;
+            health = maxHealth;
             transform.parent.gameObject.SetActive(false);
         }
         else 

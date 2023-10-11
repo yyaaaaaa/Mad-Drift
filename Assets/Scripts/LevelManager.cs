@@ -28,7 +28,8 @@ public class LevelManager : MonoBehaviour
 
     public TextAsset levelsTextAsset;
 
-    
+    public GameObject coin;
+    public GameObject canister; 
 
     private void Awake()
     {
@@ -63,8 +64,10 @@ public class LevelManager : MonoBehaviour
                 if (spawnTimer >= spawnInterval)
                 {
                     SpawnEnemy();
+                    SpawnOneTimes();
                     spawnTimer = 0f; // —брасываем таймер
                 }
+
             }
             else
             {
@@ -100,7 +103,7 @@ public class LevelManager : MonoBehaviour
         enemies.Clear();
         player.transform.position = Vector3.zero;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        player.GetComponentInChildren<HPController>().health = 100;
+        player.GetComponentInChildren<HPController>().health = player.GetComponentInChildren<HPController>().maxHealth;
         player.SetActive(true);
         timer = 0;
         timerIsRunning = true;
@@ -111,14 +114,26 @@ public class LevelManager : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        int amount = Random.Range(1, 3);
+        Vector3[] positions = new Vector3[4];
+        positions[0] = new Vector3(player.transform.position.x - 37f, 0, player.transform.position.z);
+        positions[1] = new Vector3(player.transform.position.x + 55f, 0, player.transform.position.z);
+        positions[2] = new Vector3(player.transform.position.x, 0, player.transform.position.z - 37f);
+        positions[3] = new Vector3(player.transform.position.x - 37f, 0, player.transform.position.z + 32f);
+        int amount = Random.Range(1, level/10);
         int random = Random.Range(0, enemiesToSpawn.Capacity);
 
         for (int i = 0; i < amount; i++)
         {
-            GameObject enemy = Instantiate(enemiesToSpawn[random], new Vector3(player.transform.position.x - 13f + random, 0, player.transform.position.z - 60f - random), Quaternion.identity);
+            int randomPos = Random.Range(0, positions.Length);
+            if (positions[randomPos] == Vector3.zero)
+            {
+                randomPos = Random.Range(0, positions.Length);
+            }
+            GameObject enemy = Instantiate(enemiesToSpawn[random], positions[randomPos], Quaternion.identity);
+            positions[randomPos] = Vector3.zero;
             enemy.GetComponent<ArcadeVehicleController>().player = player;
             enemies.Add(enemy);
+
         }
     }
 
@@ -155,4 +170,12 @@ public class LevelManager : MonoBehaviour
     }
      
     public int GetReward() { return reward; }
+
+    public void SpawnOneTimes()
+    {
+        float randomCoin = Random.Range(50, 150);
+        float randomCanister = Random.Range(50, 150);
+        Instantiate(coin, new Vector3(player.transform.position.x - randomCoin, 4f, player.transform.position.z), Quaternion.identity);
+        Instantiate(canister, new Vector3(player.transform.position.x + randomCanister, 4f, player.transform.position.z), Quaternion.identity);
+    }
 }

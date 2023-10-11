@@ -37,16 +37,29 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private float radius, horizontalInput, verticalInput;
     private Vector3 origin;
-    public Joystick joystick;
+    private float screen;   
+
     private void Start()
     {
+        screen = Screen.width;
         radius = rb.GetComponent<SphereCollider>().radius;
     }
     private void Update()
     {
         if (whoControls == WhoControls.Player)
         {
-            horizontalInput = joystick.Horizontal; //turning input
+            horizontalInput = 0f;
+            if (Input.touchCount > 0) 
+            { 
+                if (Input.GetTouch(0).position.x < screen / 2)
+                {
+                    horizontalInput = -1f;
+                }
+                if (Input.GetTouch(0).position.x > screen / 2)
+                {
+                    horizontalInput = 1f;
+                }   
+            }
             verticalInput = 1f;     //accelaration input
         }
         if (whoControls == WhoControls.AI)

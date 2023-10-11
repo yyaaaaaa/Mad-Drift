@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     }
     public void Garage()
     {
+        ad.LoadAd();
         current.SetActive(false);
         GarageContainer.SetActive(true);
         current = GarageContainer;

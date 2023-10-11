@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         if (money >= hpUpgrade[levelHp].UpdradeCost)
         {
             RemoveMoney(hpUpgrade[levelHp].UpdradeCost);
-            levelHp++;
+            levelHp++;           
             UpdateDef();
         }
     }
@@ -108,7 +108,8 @@ public class GameManager : MonoBehaviour
     {
         player.MaxSpeed = speedUpgrade[levelSpeed].addAmount + prevSpeed; 
         player.accelaration = accUpgrade[levelAcc].addAmount + prevAcc;
-        player.GetComponentInChildren<HPController>().health = (int)hpUpgrade[levelHp].addAmount + prevHp;
+        player.GetComponentInChildren<HPController>().maxHealth = (int)hpUpgrade[levelHp].addAmount + prevHp;
+        player.GetComponentInChildren<HPController>().slider.maxValue = (int)hpUpgrade[levelHp].addAmount + prevHp;
         levelSpeedText.text = "Level: " + levelSpeed.ToString();
         levelHpText.text = "Level: " + levelHp.ToString();
         levelAccText.text = "Level: " + levelAcc.ToString();
