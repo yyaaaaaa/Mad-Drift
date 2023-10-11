@@ -173,9 +173,23 @@ public class LevelManager : MonoBehaviour
 
     public void SpawnOneTimes()
     {
-        float randomCoin = Random.Range(50, 150);
-        float randomCanister = Random.Range(50, 150);
-        Instantiate(coin, new Vector3(player.transform.position.x - randomCoin, 4f, player.transform.position.z), Quaternion.identity);
-        Instantiate(canister, new Vector3(player.transform.position.x + randomCanister, 4f, player.transform.position.z), Quaternion.identity);
+        float randomCoin = Random.Range(100, 200);
+        float randomCanister = Random.Range(100, 200);
+        bool y = false;
+        if (Random.Range(0, 1) == 1)
+        {
+            y = true;
+        }
+
+        if (y)
+        {
+            Instantiate(coin, new Vector3(player.transform.position.x - randomCoin, 4f, player.transform.position.z), Quaternion.identity);
+            Instantiate(canister, new Vector3(player.transform.position.x + randomCanister, 4f, player.transform.position.z), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(coin, new Vector3(player.transform.position.x + randomCoin, 4f, player.transform.position.z), Quaternion.identity);
+            Instantiate(canister, new Vector3(player.transform.position.x - randomCanister, 4f, player.transform.position.z), Quaternion.identity);
+        }
     }
 }
