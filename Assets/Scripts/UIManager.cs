@@ -1,6 +1,6 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     GameObject current;
     public static UIManager instance;
     public InterstitialAd ad;
+    
     private void Awake()
     {
         if (instance != null)

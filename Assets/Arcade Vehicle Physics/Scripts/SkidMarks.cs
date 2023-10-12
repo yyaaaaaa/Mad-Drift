@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using UnityEditor.SearchService;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SkidMarks : MonoBehaviour
 {
@@ -6,9 +8,14 @@ public class SkidMarks : MonoBehaviour
     private ParticleSystem smoke;
     public ArcadeVehicleController carController;
     float fadeOutSpeed;
+    ParticleSystem.MainModule mainModule;
+    ParticleSystem.ColorOverLifetimeModule colorover;
     private void Awake()
     {
+        
         smoke = GetComponent<ParticleSystem>();
+        mainModule = smoke.main;  
+        colorover = smoke.colorOverLifetime;     
         skidMark = GetComponent<TrailRenderer>();
         skidMark.emitting = false;
         skidMark.startWidth = carController.skidWidth;
@@ -18,8 +25,19 @@ public class SkidMarks : MonoBehaviour
 
     private void OnEnable()
     {
+        string scene = SceneManager.GetActiveScene().name;
         skidMark.enabled = true;
         skidMark.emitting = true;
+        if (scene == "Level3")
+        {
+            mainModule.startColor = new Color(255, 220, 69, 60);
+            colorover.color = new Color(255, 220, 69, 60);
+        }
+        else
+        {
+            mainModule.startColor = new Color(255, 255, 255, 60);
+            colorover.color = new Color(255, 255, 255, 60);
+        }
     }
     private void OnDisable()
     {
