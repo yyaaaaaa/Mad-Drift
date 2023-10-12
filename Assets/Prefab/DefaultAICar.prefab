@@ -10867,6 +10867,7 @@ MonoBehaviour:
   MaxPitch: 1.5
   SkidSound: {fileID: 2334879844526980888}
   skidWidth: 0.17504606
+  verticalInput: 0
 --- !u!1 &6506026613588345212
 GameObject:
   m_ObjectHideFlags: 0
@@ -11125,6 +11126,12 @@ MonoBehaviour:
   maxHealth: 50
   explosion: {fileID: 1000012903210382, guid: e37496e0c52f56749909e02c9c7d3cf9, type: 3}
   timeDamage: 2
+  body: {fileID: 0}
+  wheels: {fileID: 0}
+  canvas: {fileID: 0}
+  cam: {fileID: 0}
+  reward: 10
+  text: {fileID: 0}
 --- !u!1 &7653755933805298765
 GameObject:
   m_ObjectHideFlags: 0
