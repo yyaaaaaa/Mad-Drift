@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     private float timer = 0;
     private int level = 0;
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
+    public List<GameObject> coinsModels = new List<GameObject>();
     private int minReward = 10;
     private int maxReward = 100;
     public static LevelManager instance;
@@ -118,10 +119,9 @@ public class LevelManager : MonoBehaviour
         positions[2] = new Vector3(player.transform.position.x, 0, player.transform.position.z - 37f);
         positions[3] = new Vector3(player.transform.position.x - 37f, 0, player.transform.position.z + 32f);
         int amount = Random.Range(1, level/10);
-        int random = Random.Range(0, enemiesToSpawn.Capacity);
-
         for (int i = 0; i < amount; i++)
         {
+            int random = Random.Range(0, enemiesToSpawn.Capacity);
             int randomPos = Random.Range(0, positions.Length);
             if (positions[randomPos] == Vector3.zero)
             {
@@ -175,6 +175,7 @@ public class LevelManager : MonoBehaviour
         float randomCoin = Random.Range(100, 200);
         float randomCanister = Random.Range(100, 200);
         bool y = false;
+        int random = Random.Range(0, coinsModels.Capacity);
         if (Random.Range(0, 2) == 1)
         {
             y = true;
@@ -182,13 +183,13 @@ public class LevelManager : MonoBehaviour
 
         if (y)
         {
-            Instantiate(coin, new Vector3(player.transform.position.x - randomCoin, 4f, player.transform.position.z), Quaternion.identity);
-            Instantiate(canister, new Vector3(player.transform.position.x + randomCanister, 4f, player.transform.position.z), Quaternion.identity);
+            Instantiate(coinsModels[random], new Vector3(player.transform.position.x - randomCoin, 3f, player.transform.position.z), Quaternion.identity);
+            Instantiate(canister, new Vector3(player.transform.position.x + randomCanister, 3f, player.transform.position.z), Quaternion.identity);
         }
         else
         {
-            Instantiate(coin, new Vector3(player.transform.position.x + randomCoin, 4f, player.transform.position.z), Quaternion.identity);
-            Instantiate(canister, new Vector3(player.transform.position.x - randomCanister, 4f, player.transform.position.z), Quaternion.identity);
+            Instantiate(coinsModels[random], new Vector3(player.transform.position.x + randomCoin, 3f, player.transform.position.z), Quaternion.identity);
+            Instantiate(canister, new Vector3(player.transform.position.x - randomCanister, 3f, player.transform.position.z), Quaternion.identity);
         }
     }
 
