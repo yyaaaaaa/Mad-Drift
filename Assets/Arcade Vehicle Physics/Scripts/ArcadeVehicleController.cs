@@ -38,7 +38,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private float radius, horizontalInput;
     public float verticalInput;
     private Vector3 origin;
-    private float screen;   
+    private float screen;
 
     private void Start()
     {
@@ -50,8 +50,8 @@ public class ArcadeVehicleController : MonoBehaviour
         if (whoControls == WhoControls.Player)
         {
             horizontalInput = 0f;
-            if (Input.touchCount > 0) 
-            { 
+            if (Input.touchCount > 0)
+            {
                 if (Input.GetTouch(0).position.x < screen / 2)
                 {
                     horizontalInput = -1f;
@@ -59,7 +59,7 @@ public class ArcadeVehicleController : MonoBehaviour
                 if (Input.GetTouch(0).position.x > screen / 2)
                 {
                     horizontalInput = 1f;
-                }   
+                }
             }
             verticalInput = 1f;     //accelaration input
         }

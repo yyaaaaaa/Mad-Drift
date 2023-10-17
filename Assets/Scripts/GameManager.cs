@@ -101,7 +101,11 @@ public class GameManager : MonoBehaviour
         UpdateMoney();
     }
 
-    public void RemoveMoney(int ammount) {  this.money -= ammount; }
+    public void RemoveMoney(int ammount) 
+    { 
+        this.money -= ammount;
+        UpdateMoney();
+    }
 
 
 
