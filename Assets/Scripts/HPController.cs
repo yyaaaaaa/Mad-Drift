@@ -2,7 +2,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class HPController : MonoBehaviour
 {
     public float health = 100;
@@ -83,7 +82,6 @@ public class HPController : MonoBehaviour
         wheels.SetActive(true);
         canvas.SetActive(true);
     }
-
     private IEnumerator DamageSeq()
     {
         LevelManager.instance.DisableCollisions(gameObject);
