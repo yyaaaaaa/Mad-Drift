@@ -29,7 +29,6 @@ public class LevelManager : MonoBehaviour
 
     public TextAsset levelsTextAsset;
 
-    public GameObject coin;
     public GameObject canister;
     public GameObject textobj;
     private void Awake()

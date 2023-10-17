@@ -31,7 +31,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI costHpText;
     public TextMeshProUGUI costAccText;
     public TextMeshProUGUI levelText;
-
+    private bool fullHP = false;
+    private bool fullAcc = false;
+    private bool fullSpeed = false;
     private void Awake()
     {
         if (instance != null)
@@ -50,9 +52,9 @@ public class GameManager : MonoBehaviour
             levelSpeed = PlayerPrefs.GetInt("levelSpeed");
             levelHp = PlayerPrefs.GetInt("levelHp");
             levelAcc = PlayerPrefs.GetInt("levelAcc");
-            SetPrevDef();
-            UpdateDef();
         }
+        SetPrevDef();
+        UpdateDef();
         UpdateMoney();
     }
 
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     public void PlusSpeed()
     {
-        if (money >= speedUpgrade[levelSpeed].UpdradeCost)
+        if (money >= speedUpgrade[levelSpeed].UpdradeCost && !fullSpeed)
         {
             RemoveMoney(speedUpgrade[levelSpeed].UpdradeCost);
             levelSpeed++;
@@ -77,7 +79,7 @@ public class GameManager : MonoBehaviour
     }
     public void PlusAcceleration()
     {
-        if (money >= accUpgrade[levelAcc].UpdradeCost)
+        if (money >= accUpgrade[levelAcc].UpdradeCost && !fullAcc)
         {
             RemoveMoney(accUpgrade[levelAcc].UpdradeCost);
             levelAcc++;
@@ -87,7 +89,7 @@ public class GameManager : MonoBehaviour
 
     public void PlusHP()
     {
-        if (money >= hpUpgrade[levelHp].UpdradeCost)
+        if (money >= hpUpgrade[levelHp].UpdradeCost && !fullHP)
         {
             RemoveMoney(hpUpgrade[levelHp].UpdradeCost);
             levelHp++;           
@@ -157,6 +159,7 @@ public class GameManager : MonoBehaviour
             var amount = float.Parse(values[1]);
             hpUpgrade.Add(new Upgrade(cost, amount));
         }
+        CheckFull();
     }
 
     void SetPrevDef()
@@ -168,8 +171,30 @@ public class GameManager : MonoBehaviour
 
     public void ChangeScene()
     {
-        int rand = Random.Range(1, 4);
+        int rand = Random.Range(0, 2);
         SceneManager.LoadScene("Level" + rand);
+    }
+
+    private void CheckFull()
+    {
+        if (levelHp >= hpUpgrade.Count - 1)
+        {
+            fullHP = true;
+            levelHpText.text = "Max Upgrade";
+            costHpText.text = "";
+        }
+        if (levelAcc >= accUpgrade.Count-1)
+        {
+            fullAcc = true;
+            levelAccText.text = "Max Upgrade";
+            costAccText.text = "";
+        }
+        if (levelSpeed >= speedUpgrade.Count-1)
+        {
+            fullSpeed = true;
+            levelSpeedText.text = "Max Upgrade";
+            costSpeedText.text = "";
+        }
     }
 
 }
