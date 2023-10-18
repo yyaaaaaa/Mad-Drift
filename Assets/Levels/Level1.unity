@@ -190,6 +190,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingCart (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
 --- !u!1001 &7301373
@@ -258,6 +263,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShoppingCart (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
@@ -328,6 +338,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingCart (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
 --- !u!1001 &71730913
@@ -397,6 +412,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingCart (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
 --- !u!1001 &346478381
@@ -465,6 +485,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShoppingCart (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
@@ -633,6 +658,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingCart (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
 --- !u!1001 &727969661
@@ -701,6 +731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShoppingCart (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
@@ -771,6 +806,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingCart (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
 --- !u!1001 &1087208793
@@ -839,6 +879,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShoppingCart (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
@@ -909,6 +954,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingCart (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
 --- !u!1001 &1367487477
@@ -977,6 +1027,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShoppingCart (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
@@ -1047,6 +1102,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingCart
       objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
 --- !u!1001 &1505464574
@@ -1115,6 +1175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShoppingCart (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
@@ -1279,6 +1344,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingCart (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
 --- !u!1001 &1879869999
@@ -1348,6 +1418,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShoppingCart (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
 --- !u!1001 &2100338432
@@ -1416,6 +1491,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShoppingCart (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445653733515525939, guid: e2993ed40c409e347bb6c4314f6bb2f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2993ed40c409e347bb6c4314f6bb2f6, type: 3}
