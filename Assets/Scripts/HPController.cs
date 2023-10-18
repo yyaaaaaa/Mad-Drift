@@ -16,7 +16,6 @@ public class HPController : MonoBehaviour
     public GameObject canvas;
     public FollowPlayer cam;
     public int reward = 10;
-    public GameObject text;
     public GameObject PopUpText;
     private void Start()
     {
@@ -59,9 +58,7 @@ public class HPController : MonoBehaviour
             var h = Instantiate(PopUpText, transform.position, transform.rotation);
             h.SetActive(true);
             Destroy(transform.parent.gameObject);
-            text.GetComponent<TextMeshProUGUI>().text = "Car crush +" + reward;
             GameManager.instance.AddMoney(reward);
-            text.SetActive(true);
         }       
     }
 

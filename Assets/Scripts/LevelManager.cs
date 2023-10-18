@@ -30,7 +30,6 @@ public class LevelManager : MonoBehaviour
     public TextAsset levelsTextAsset;
 
     public GameObject canister;
-    public GameObject textobj;
 
     private List<GameObject> spawnedCanisters = new();
     private List<GameObject> spawnedCoins = new();
@@ -79,7 +78,7 @@ public class LevelManager : MonoBehaviour
                     rewardText.color = Color.Lerp(Color.white, Color.red, lerpFactor);
 
                     // Увеличиваем размер текста
-                    float newSize = Mathf.Lerp(86f, 180f, lerpFactor);
+                    float newSize = Mathf.Lerp(120f, 180f, lerpFactor);
                     rewardText.fontSize = (int)newSize;
                 }
 
@@ -147,7 +146,6 @@ public class LevelManager : MonoBehaviour
             GameObject enemy = Instantiate(enemiesToSpawn[random], positions[randomPos], Quaternion.identity);
             positions[randomPos] = Vector3.zero;
             enemy.GetComponent<ArcadeVehicleController>().player = player;
-            enemy.GetComponentInChildren<HPController>().text = textobj;
             enemy.GetComponentInChildren<HPController>().PopUpText = popuptext;
             enemies.Add(enemy);
 

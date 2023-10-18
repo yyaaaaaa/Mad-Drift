@@ -184,15 +184,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Car Crush +10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4dfd99278618c044cb564d3ad10e7887, type: 2}
-  m_sharedMaterial: {fileID: 1601511655352438427, guid: 4dfd99278618c044cb564d3ad10e7887,
+  m_fontAsset: {fileID: 11400000, guid: 88615e2eaf4b59a47b6b6a675fbfd9ad, type: 2}
+  m_sharedMaterial: {fileID: 2360695708222689498, guid: 88615e2eaf4b59a47b6b6a675fbfd9ad,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
