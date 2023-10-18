@@ -20355,7 +20355,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   cam: {fileID: 0}
   reward: 10
-  text: {fileID: 0}
+  PopUpText: {fileID: 0}
 --- !u!1001 &462439247585456130
 PrefabInstance:
   m_ObjectHideFlags: 0
