@@ -34,6 +34,9 @@ public class LevelManager : MonoBehaviour
     private List<GameObject> spawnedCanisters = new();
     private List<GameObject> spawnedCoins = new();
     public GameObject popuptext;
+    public Animator animatorTimer;
+    public Animator animatorClock;
+
     private void Awake()
     {
         if (instance != null)
@@ -73,13 +76,8 @@ public class LevelManager : MonoBehaviour
                 }
                 if (timer <= 10f)
                 {
-
-                    float lerpFactor = Mathf.InverseLerp(10f, 0f, timer);
-                    rewardText.color = Color.Lerp(Color.white, Color.red, lerpFactor);
-
-                    // Увеличиваем размер текста
-                    float newSize = Mathf.Lerp(120f, 180f, lerpFactor);
-                    rewardText.fontSize = (int)newSize;
+                    animatorClock.SetBool("10sec", true);
+                    animatorTimer.SetBool("10sec", true);
                 }
 
             }
@@ -94,8 +92,8 @@ public class LevelManager : MonoBehaviour
 
     private void OnLevelComplete()
     {
-        rewardText.color = Color.white;
-        rewardText.fontSize = 86f;
+        animatorClock.SetBool("10sec", false);
+        animatorTimer.SetBool("10sec", false);
         int addReward = Random.Range(minReward, maxReward);
         UIManager.instance.WinLevel();
         int totalReward = addReward + ((int)timeCap - reward); 
@@ -110,8 +108,8 @@ public class LevelManager : MonoBehaviour
 
     public void LevelStart()
     {
-        rewardText.color = Color.white;
-        rewardText.fontSize = 86f;
+        animatorClock.SetBool("10sec", false);
+        animatorTimer.SetBool("10sec", false);
         player.SetActive(false);
         enemies.Clear();
         player.transform.position = Vector3.zero;
@@ -156,16 +154,6 @@ public class LevelManager : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             Destroy(enemy);
-        }
-        foreach (GameObject coin in spawnedCoins)
-        {
-            coin.SetActive(false);
-            spawnedCoins.Remove(coin); 
-        }
-        foreach (GameObject canister in spawnedCanisters)
-        {
-            canister.SetActive(false);
-            spawnedCanisters.Remove(canister);
         }
     }
     void LoadLevel(int neededLevel)

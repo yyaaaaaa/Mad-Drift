@@ -2417,6 +2417,8 @@ MonoBehaviour:
     type: 3}
   popuptext: {fileID: 8462647107892715069, guid: ba70b5eb78dcabb4aa1bec62925b3038,
     type: 3}
+  animatorTimer: {fileID: 1331877074}
+  animatorClock: {fileID: 1206358582}
 --- !u!4 &619328274
 Transform:
   m_ObjectHideFlags: 0
