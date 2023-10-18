@@ -15046,7 +15046,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -20604,6 +20604,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   reward: 10
   text: {fileID: 0}
+  PopUpText: {fileID: 0}
 --- !u!1 &7653755933805298765
 GameObject:
   m_ObjectHideFlags: 0

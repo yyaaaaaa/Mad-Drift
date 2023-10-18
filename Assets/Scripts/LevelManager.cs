@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     private float timer = 0;
     private int level = 0;
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
-    public List<GameObject> coinsModels = new List<GameObject>();
+    public List<string> coinsModels = new();
     private int minReward = 10;
     private int maxReward = 100;
     public static LevelManager instance;
@@ -31,6 +31,10 @@ public class LevelManager : MonoBehaviour
 
     public GameObject canister;
     public GameObject textobj;
+
+    private List<GameObject> spawnedCanisters = new();
+    private List<GameObject> spawnedCoins = new();
+    public GameObject popuptext;
     private void Awake()
     {
         if (instance != null)
@@ -42,20 +46,21 @@ public class LevelManager : MonoBehaviour
         ParseLevels();
         level = GameManager.instance.level;
         LoadLevel(level);
+        timer = timeCap;
     }
 
         void Update()
     {
         if (timerIsRunning)
         {
-            if (timer < timeCap)
+            if (timer >= 0)
             {
-                timer += Time.deltaTime;
+                timer -= Time.deltaTime;
                 slider.value = timer;
                 spawnTimer += Time.deltaTime;
-                reward = (int)(timer * (1 + level / 100));
+                reward =(int)timer;
                 rewardText.text = reward.ToString();
-                loseRewardText.text = "+" + reward.ToString();
+                loseRewardText.text = "+" + (timeCap - reward).ToString();
                 if (enemies.Count <= 0)
                 {
                     SpawnEnemy();
@@ -64,8 +69,18 @@ public class LevelManager : MonoBehaviour
                 if (spawnTimer >= spawnInterval)
                 {
                     SpawnEnemy();
-                    SpawnOneTimes();
+                    SpawnOneTimes(0);
                     spawnTimer = 0f; // Сбрасываем таймер
+                }
+                if (timer <= 10f)
+                {
+
+                    float lerpFactor = Mathf.InverseLerp(10f, 0f, timer);
+                    rewardText.color = Color.Lerp(Color.white, Color.red, lerpFactor);
+
+                    // Увеличиваем размер текста
+                    float newSize = Mathf.Lerp(86f, 180f, lerpFactor);
+                    rewardText.fontSize = (int)newSize;
                 }
 
             }
@@ -80,35 +95,38 @@ public class LevelManager : MonoBehaviour
 
     private void OnLevelComplete()
     {
+        rewardText.color = Color.white;
+        rewardText.fontSize = 86f;
         int addReward = Random.Range(minReward, maxReward);
         UIManager.instance.WinLevel();
-        int totalReward = addReward + reward; 
+        int totalReward = addReward + ((int)timeCap - reward); 
         addRewardText.text = "+" + totalReward.ToString();
         GameManager.instance.AddMoney(totalReward);
         GameManager.instance.level += 1;
         level += 1;
         GameManager.instance.Save();
         LoadLevel(level);
+        ClearSpawned();
     }
 
     public void LevelStart()
     {
-        foreach (GameObject enemy in enemies)
-        {
-            Destroy(enemy);
-        }
+        rewardText.color = Color.white;
+        rewardText.fontSize = 86f;
         player.SetActive(false);
         enemies.Clear();
         player.transform.position = Vector3.zero;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.GetComponentInChildren<HPController>().health = player.GetComponentInChildren<HPController>().maxHealth;
         player.SetActive(true);
-        timer = 0;
         timerIsRunning = true;
         slider.maxValue = timeCap;
+        timer = timeCap;
         SpawnEnemy();
         Time.timeScale = 1f;
     }
+
+ 
 
     public void SpawnEnemy()
     {
@@ -130,14 +148,31 @@ public class LevelManager : MonoBehaviour
             positions[randomPos] = Vector3.zero;
             enemy.GetComponent<ArcadeVehicleController>().player = player;
             enemy.GetComponentInChildren<HPController>().text = textobj;
+            enemy.GetComponentInChildren<HPController>().PopUpText = popuptext;
             enemies.Add(enemy);
 
         }
     }
-
+    private void ClearSpawned()
+    {
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+        foreach (GameObject coin in spawnedCoins)
+        {
+            coin.SetActive(false);
+            spawnedCoins.Remove(coin); 
+        }
+        foreach (GameObject canister in spawnedCanisters)
+        {
+            canister.SetActive(false);
+            spawnedCanisters.Remove(canister);
+        }
+    }
     void LoadLevel(int neededLevel)
     {
-        if (neededLevel <= levels.Count)
+        if (neededLevel < levels.Count)
         {
             maxReward = levels[neededLevel].maxReward;
             minReward = levels[neededLevel].minReward;
@@ -169,35 +204,36 @@ public class LevelManager : MonoBehaviour
      
     public int GetReward() { return reward; }
 
-    public void SpawnOneTimes()
+    public void SpawnOneTimes( int amount)
     {
-        float randomCoin = Random.Range(100, 200);
-        float randomCanister = Random.Range(100, 200);
-        bool y = false;
-        int random = Random.Range(0, coinsModels.Capacity);
-        if (Random.Range(0, 2) == 1)
+        for (int i = 0; i <= amount; i++)
         {
-            y = true;
-        }
+            float minDistance = 50f; // Минимальное допустимое расстояние между игроком и объектом
+            float maxDistance = 200f; // Максимальное расстояние от игрока, на котором объекты могут спауниться
 
-        if (y)
-        {
-            Instantiate(coinsModels[random], new Vector3(player.transform.position.x - randomCoin, 3f, player.transform.position.z), Quaternion.identity);
-            Instantiate(canister, new Vector3(player.transform.position.x + randomCanister, 3f, player.transform.position.z), Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(coinsModels[random], new Vector3(player.transform.position.x + randomCoin, 3f, player.transform.position.z), Quaternion.identity);
-            Instantiate(canister, new Vector3(player.transform.position.x - randomCanister, 3f, player.transform.position.z), Quaternion.identity);
-        }
-    }
+            float randomCoinX, randomCanisterX, randomCoinZ, randomCanisterZ;
+            Vector3 coinOffset, canisterOffset;
+            int randomCoinIndex;
 
-    public void DisableCollisions(GameObject obj)
-    {
-        obj.GetComponentInParent<BoxCollider>().enabled = false;
-    }
-    public void EnableCollisions(GameObject obj)
-    {
-        obj.GetComponentInParent<BoxCollider>().enabled = true;
+            // Генерация случайных координат для объектов
+            do
+            {
+                randomCoinX = Random.Range(-maxDistance, maxDistance);
+                randomCanisterX = Random.Range(-maxDistance, maxDistance);
+                randomCoinZ = Random.Range(-maxDistance, maxDistance);
+                randomCanisterZ = Random.Range(-maxDistance, maxDistance);
+
+                coinOffset = new Vector3(randomCoinX, 3f, randomCoinZ);
+                canisterOffset = new Vector3(randomCanisterX, 3f, randomCanisterZ);
+            } while (Vector3.Distance(player.transform.position, player.transform.position + coinOffset) < minDistance
+                  || Vector3.Distance(player.transform.position, player.transform.position + canisterOffset) < minDistance);
+
+            // Случайно выбираем модель монеты из списка
+            randomCoinIndex = Random.Range(0, coinsModels.Count);
+
+            // Создаем монету и бочку в случайных позициях относительно игрока
+            spawnedCoins.Add(ObjectPooler.Instance.SpawnFromPool(coinsModels[randomCoinIndex], player.transform.position + coinOffset, Quaternion.identity));
+            spawnedCanisters.Add(ObjectPooler.Instance.SpawnFromPool("Canister", player.transform.position + canisterOffset , Quaternion.identity));        
+        }
     }
 }

@@ -17,6 +17,7 @@ public class HPController : MonoBehaviour
     public FollowPlayer cam;
     public int reward = 10;
     public GameObject text;
+    public GameObject PopUpText;
     private void Start()
     {
         slider.maxValue = maxHealth;
@@ -27,7 +28,6 @@ public class HPController : MonoBehaviour
         if (health > 0 && !isInvincible)
         {
             health -= damage;
-           // StartCoroutine(DamageSeq());
         }  
     }
     private void Update()
@@ -56,6 +56,8 @@ public class HPController : MonoBehaviour
         }
         else
         {
+            var h = Instantiate(PopUpText, transform.position, transform.rotation);
+            h.SetActive(true);
             Destroy(transform.parent.gameObject);
             text.GetComponent<TextMeshProUGUI>().text = "Car crush +" + reward;
             GameManager.instance.AddMoney(reward);
@@ -82,22 +84,5 @@ public class HPController : MonoBehaviour
         wheels.SetActive(true);
         canvas.SetActive(true);
     }
-    private IEnumerator DamageSeq()
-    {
-        LevelManager.instance.DisableCollisions(gameObject);
-        var boxcolliders = GetComponentsInChildren<BoxCollider>();
-        foreach (var boxcollider in boxcolliders)
-        {
-            boxcollider.enabled = false;
-        }
-        isInvincible = true;
-        yield return new WaitForSeconds(timeDamage);
-        LevelManager.instance.EnableCollisions(gameObject);
-        foreach (var boxcollider in boxcolliders)
-        {
-            boxcollider.enabled = true;
-        }
-        isInvincible = false;
-    }
-
+  
 }

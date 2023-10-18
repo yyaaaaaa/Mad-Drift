@@ -988,6 +988,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222301069}
   m_CullTransparentMesh: 1
+--- !u!1 &299133287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 299133288}
+  - component: {fileID: 299133289}
+  m_Layer: 0
+  m_Name: ObjPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &299133288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299133287}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 330557237}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &299133289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299133287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29a067567ef7f64580d1b070085d95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: Canister
+    prefab: {fileID: 2694547117433232856, guid: 121fedc7f411a2e489557cc8049c7d90,
+      type: 3}
+    size: 30
+  - tag: Cube
+    prefab: {fileID: 435167911866865959, guid: fa98108c2c24ae341af07d893faff022, type: 3}
+    size: 30
+  - tag: Square
+    prefab: {fileID: 8392656567370404659, guid: a6d336c2790d78a42a7a36eae70cd7e5,
+      type: 3}
+    size: 30
+  - tag: Triangle
+    prefab: {fileID: 5575163111863506450, guid: 68d42bf3eb4e01e4d9b177b803418088,
+      type: 3}
+    size: 30
 --- !u!114 &307118452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,6 +1094,7 @@ Transform:
   - {fileID: 379202854}
   - {fileID: 619328274}
   - {fileID: 1762213112}
+  - {fileID: 299133288}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2267,9 +2328,9 @@ MonoBehaviour:
   enemiesToSpawn:
   - {fileID: 6473556860183283201, guid: 52db54a1851a95242a88bff3b95a2387, type: 3}
   coinsModels:
-  - {fileID: 5575163111863506450, guid: 68d42bf3eb4e01e4d9b177b803418088, type: 3}
-  - {fileID: 8392656567370404659, guid: a6d336c2790d78a42a7a36eae70cd7e5, type: 3}
-  - {fileID: 435167911866865959, guid: fa98108c2c24ae341af07d893faff022, type: 3}
+  - Square
+  - Triangle
+  - Cube
   slider: {fileID: 749531350}
   player: {fileID: 9014480718604955645}
   rewardText: {fileID: 1331877072}
@@ -2279,6 +2340,8 @@ MonoBehaviour:
   canister: {fileID: 2694547117433232856, guid: 121fedc7f411a2e489557cc8049c7d90,
     type: 3}
   textobj: {fileID: 1693136505}
+  popuptext: {fileID: 8462647107892715069, guid: ba70b5eb78dcabb4aa1bec62925b3038,
+    type: 3}
 --- !u!4 &619328274
 Transform:
   m_ObjectHideFlags: 0

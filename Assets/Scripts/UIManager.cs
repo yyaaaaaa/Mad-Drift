@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
     }
     public void WinLevel()
     {
-        ad.ShowAd();
+        //ad.ShowAd();
         current.SetActive(false);
         WinPopUpContainer.SetActive(true);
         current = WinPopUpContainer;
@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
 
     public void LoseLevel()
     {
-        ad.ShowAd();
+        //ad.ShowAd();
         current.SetActive(false);
         LoseContaier.SetActive(true);
         current = LoseContaier;

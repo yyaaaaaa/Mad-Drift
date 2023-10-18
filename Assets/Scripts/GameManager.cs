@@ -170,9 +170,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void ChangeScene()
-    {
-        int rand = Random.Range(0, 2);
-        SceneManager.LoadScene("Level" + rand);
+    {    
+        SceneManager.LoadScene("Level1");
     }
 
     private void CheckFull()
